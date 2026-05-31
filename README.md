@@ -2,9 +2,12 @@
 
 Aplicação client-side que consome a API do GitHub e exibe os repositórios mais populares de um usuário.
 
+<img width="1920" height="999" alt="image" src="https://github.com/user-attachments/assets/fcff69e0-6184-4e7c-97b2-df1ec3a222aa" />
+
+
 ## Demo
 
-🔗 [Link da aplicação](https://SEU-LINK-AQUI)
+🔗 [Link da aplicação](https://gh-repository-explorer.vercel.app/)
 
 ## Tecnologias
 

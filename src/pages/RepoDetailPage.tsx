@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
-import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 import { getRepo } from '../services/github';
 import type { GitHubRepository } from '../types';
@@ -39,8 +38,8 @@ export default function RepoDetailPage() {
         <Link to={`/user/${username}`} className="btn btn-outline-secondary btn-sm mb-4">
           ← Voltar para @{username}
         </Link>
-        {loading && <LoadingSpinner />}
         {error && <ErrorMessage message={error} />}
+        {loading && <RepoDetailSkeleton />}
         {repo && (
           <div className="card shadow-sm overflow-hidden">
             <div className={styles.repoDetailHeader}>
@@ -79,6 +78,32 @@ export default function RepoDetailPage() {
         )}
       </div>
     </Layout>
+  );
+}
+
+function RepoDetailSkeleton() {
+  return (
+    <div className="card shadow-sm overflow-hidden">
+      <div className={styles.repoDetailHeader}>
+        <div className="d-flex justify-content-between align-items-start gap-3">
+          <div className={clsx(styles.skeletonLight, styles.skeletonRepoName)} />
+          <div className={clsx(styles.skeletonLight, styles.skeletonButton)} />
+        </div>
+        <div className={clsx(styles.skeletonLight, styles.skeletonDesc)} />
+      </div>
+      <div className="card-body">
+        <div className="row row-cols-2 row-cols-md-3 g-3">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div key={index} className="col">
+              <div className="border rounded p-3 text-center">
+                <div className={clsx(styles.skeleton, styles.skeletonStatValue, 'mx-auto')} />
+                <div className={clsx(styles.skeleton, styles.skeletonStatLabel, 'mx-auto mt-2')} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 

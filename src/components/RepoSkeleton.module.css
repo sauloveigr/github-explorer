@@ -1,0 +1,38 @@
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e9ecef 25%, #f0f0f0 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 0.25rem;
+}
+
+.skeletonTitle {
+  width: 40%;
+  height: 1rem;
+}
+
+.skeletonBadge {
+  width: 3.75rem;
+  height: 1.25rem;
+  border-radius: 0.75rem;
+}
+
+.skeletonBadgeLg {
+  width: 4.375rem;
+  height: 1.25rem;
+  border-radius: 0.75rem;
+}
+
+.skeletonDesc {
+  width: 70%;
+  height: 0.75rem;
+}
+
+.skeletonDate {
+  width: 30%;
+  height: 0.625rem;
+}

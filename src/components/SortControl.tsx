@@ -1,4 +1,5 @@
 import type { SortBy } from '../types';
+import styles from './SortControl.module.css';
 
 type SortDir = 'asc' | 'desc';
 
@@ -19,7 +20,7 @@ export default function SortControl({ sortBy, sortDir, onSortBy, onSortDir }: Pr
   return (
     <div className="d-flex gap-2 align-items-center">
       <select
-        className="form-select form-select-sm sort-select"
+        className={`form-select form-select-sm ${styles.sortSelect}`}
         value={sortBy}
         onChange={(event) => onSortBy(event.target.value as SortBy)}
         aria-label="Ordenar por"

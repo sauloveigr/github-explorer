@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Layout from '../components/Layout';
@@ -5,6 +6,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 import { getRepo } from '../services/github';
 import type { GitHubRepository } from '../types';
+import styles from './RepoDetailPage.module.css';
 
 export default function RepoDetailPage() {
   const { username = '', repoName = '' } = useParams<{ username: string; repoName: string }>();
@@ -40,23 +42,24 @@ export default function RepoDetailPage() {
         {loading && <LoadingSpinner />}
         {error && <ErrorMessage message={error} />}
         {repo && (
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <div className="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                <h1 className="h3 mb-0">{repo.name}</h1>
+          <div className="card shadow-sm overflow-hidden">
+            <div className={styles.repoDetailHeader}>
+              <div className="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                <h1 className="h3 mb-0 text-white">{repo.name}</h1>
                 <a
                   href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-dark btn-sm"
+                  className="btn btn-light btn-sm"
                 >
                   Ver no GitHub ↗
                 </a>
               </div>
               {repo.description && (
-                <p className="text-muted mt-3 mb-0">{repo.description}</p>
+                <p className={clsx('mt-2 mb-0', styles.repoDetailDesc)}>{repo.description}</p>
               )}
-              <hr />
+            </div>
+            <div className="card-body">
               <div className="row row-cols-2 row-cols-md-3 g-3">
                 <StatCard label="Estrelas" value={`⭐ ${repo.stargazers_count.toLocaleString()}`} />
                 <StatCard label="Forks" value={`🔀 ${repo.forks_count.toLocaleString()}`} />
@@ -65,7 +68,7 @@ export default function RepoDetailPage() {
               {repo.topics && repo.topics.length > 0 && (
                 <div className="mt-3 d-flex flex-wrap gap-2">
                   {repo.topics.map((topic) => (
-                    <span key={topic} className="rounded-pill small px-2 py-1 topic-badge">
+                    <span key={topic} className={clsx('rounded-pill small px-2 py-1', styles.topicBadge)}>
                       {topic}
                     </span>
                   ))}
@@ -82,7 +85,7 @@ export default function RepoDetailPage() {
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="col">
-      <div className="border rounded p-3 text-center">
+      <div className="border rounded p-3 text-center h-100">
         <div className="fs-5 fw-semibold">{value}</div>
         <div className="text-muted small">{label}</div>
       </div>

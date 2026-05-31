@@ -1,7 +1,9 @@
+import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import type { GitHubRepository } from '../types';
 import LANG_COLORS from '../utils/langColors';
 import { formatRelativeDate } from '../utils/date';
+import styles from './RepoCard.module.css';
 
 interface Props {
   repo: GitHubRepository;
@@ -13,28 +15,30 @@ export default function RepoCard({ repo, username }: Props) {
 
   return (
     <Link to={`/user/${username}/repo/${repo.name}`} className="text-decoration-none">
-      <div className="card mb-2 shadow-sm repo-card">
-        <div className="card-body py-3">
-          <div className="d-flex justify-content-between align-items-start">
-            <h3 className="h6 mb-1 text-primary">{repo.name}</h3>
-            <div className="d-flex gap-2 flex-shrink-0 align-items-center">
-              <span className="d-flex align-items-center gap-1 small repo-stars">
-                ⭐ {repo.stargazers_count.toLocaleString()}
-              </span>
+      <div className={clsx('card mb-2 shadow-sm', styles.repoCard)}>
+        <div className="card-body">
+          <h3 className={clsx('h6 mb-1', styles.repoCardName)}>{repo.name}</h3>
+          {repo.description && (
+            <p className={clsx('text-muted small mb-0', styles.repoCardDesc)}>
+              {repo.description}
+            </p>
+          )}
+          <div className="d-flex align-items-center justify-content-between mt-2">
+            <div className="d-flex align-items-center gap-3">
               {repo.language && (
-                <span className="d-flex align-items-center gap-1 small repo-language">
-                  <span className="lang-dot" style={{ backgroundColor: langColor }} />
+                <span className={clsx('d-flex align-items-center gap-1 small', styles.repoLanguage)}>
+                  <span className={styles.langDot} style={{ backgroundColor: langColor }} />
                   {repo.language}
                 </span>
               )}
+              <span className={clsx('small', styles.repoStars)}>
+                ⭐ {repo.stargazers_count.toLocaleString()}
+              </span>
             </div>
+            <span className={clsx('text-muted', styles.repoDate)}>
+              {formatRelativeDate(repo.updated_at)}
+            </span>
           </div>
-          {repo.description && (
-            <p className="text-muted small mb-0 mt-1">{repo.description}</p>
-          )}
-          <p className="text-muted mb-0 mt-2 repo-date">
-            Atualizado em {formatRelativeDate(repo.updated_at)}
-          </p>
         </div>
       </div>
     </Link>

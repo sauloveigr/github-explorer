@@ -1,0 +1,16 @@
+.repoDetailHeader {
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  padding: 2rem;
+}
+
+.repoDetailDesc {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.topicBadge {
+  background-color: #ddf4ff;
+  color: #0969da;
+  font-weight: 500;
+  border: 1px solid #b6e3ff;
+}

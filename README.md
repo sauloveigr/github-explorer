@@ -2,8 +2,7 @@
 
 Aplicação client-side que consome a API do GitHub e exibe os repositórios mais populares de um usuário.
 
-<img width="1920" height="999" alt="image" src="https://github.com/user-attachments/assets/fcff69e0-6184-4e7c-97b2-df1ec3a222aa" />
-
+<img width="1904" height="999" alt="image" src="https://github.com/user-attachments/assets/7006bc4c-af3a-445b-8208-df6b6726b3be" />
 
 ## Demo
 

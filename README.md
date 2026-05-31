@@ -16,6 +16,7 @@ Aplicação client-side que consome a API do GitHub e exibe os repositórios mai
 - [React Router v7](https://reactrouter.com/)
 - [Axios](https://axios-http.com/)
 - [Bootstrap 5](https://getbootstrap.com/)
+- [clsx](https://github.com/lukeed/clsx)
 
 ## Funcionalidades
 
@@ -64,13 +65,21 @@ yarn preview
 
 ```
 src/
-├── components/     # Componentes reutilizáveis
-├── hooks/          # Custom hooks (useUser, useRepositories)
-├── pages/          # Páginas da aplicação
-├── router/         # Configuração de rotas
-├── services/       # Integração com a API do GitHub
-├── types/          # Tipagens TypeScript
-└── utils/          # Funções utilitárias
+├── components/          # Componentes reutilizáveis
+│   ├── Component.tsx
+│   └── Component.module.css
+├── hooks/               # Custom hooks (useUser, useRepositories)
+├── pages/               # Páginas da aplicação
+│   ├── Page.tsx
+│   └── Page.module.css
+├── router/              # Configuração de rotas
+├── services/            # Integração com a API do GitHub
+├── types/               # Tipagens TypeScript
+└── utils/               # Funções utilitárias
+    ├── date.ts          # Formatação de datas
+    ├── history.ts       # Histórico de buscas (localStorage)
+    ├── langColors.ts    # Cores por linguagem de programação
+    └── sort.ts          # Comparadores de ordenação
 ```
 
 ## APIs utilizadas

@@ -7,7 +7,7 @@ Aplicação client-side que consome a API do GitHub e exibe os repositórios mai
 
 ## Demo
 
-🔗 [Link da aplicação](https://SEU-LINK-AQUI)
+🔗 [Link da aplicação](https://gh-repository-explorer.vercel.app/)
 
 ## Tecnologias
 

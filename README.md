@@ -82,6 +82,24 @@ src/
     └── sort.ts          # Comparadores de ordenação
 ```
 
+## Requisitos atendidos
+
+### Técnicos
+- ✅ React 19 (sem Vue ou Angular)
+- ✅ Rotas com React Router v7
+- ✅ Axios para consumo da API
+- ✅ Layout responsivo com Bootstrap 5
+
+### Negócio
+- ✅ Busca de usuário do GitHub
+- ✅ Detalhes do usuário (seguidores, seguindo, avatar, e-mail e bio)
+- ✅ Repositórios ordenados por estrelas (decrescente)
+- ✅ Alteração da ordenação (estrelas, nome, atualização — crescente/decrescente)
+- ✅ Página de detalhes do repositório com nome, descrição, estrelas, linguagem e link externo
+
+### Bônus
+- ✅ Aplicação hospedada no Vercel
+
 ## APIs utilizadas
 
 | Endpoint                      | Descrição                  |

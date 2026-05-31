@@ -44,7 +44,7 @@ export default function UserPage() {
               {user && <UserCard user={user} />}
             </div>
 
-            <div className="col-lg-8">
+            <section className="col-lg-8" aria-label="Repositórios">
               <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <h2 className="h5 mb-0">
                   Repositórios
@@ -62,15 +62,27 @@ export default function UserPage() {
                 )}
               </div>
 
-              {reposLoading && Array.from({ length: 5 }).map((_, index) => <RepoSkeleton key={index} />)}
+              {reposLoading && (
+                <ul className="list-unstyled mb-0">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <li key={index}><RepoSkeleton /></li>
+                  ))}
+                </ul>
+              )}
               {reposError && <ErrorMessage message={reposError} />}
               {!reposLoading && !reposError && sortedRepos.length === 0 && (
                 <p className="text-muted">Nenhum repositório público encontrado.</p>
               )}
-              {!reposLoading && sortedRepos.map((repo) => (
-                <RepoCard key={repo.id} repo={repo} username={username} />
-              ))}
-            </div>
+              {!reposLoading && (
+                <ul className="list-unstyled mb-0">
+                  {sortedRepos.map((repo) => (
+                    <li key={repo.id}>
+                      <RepoCard repo={repo} username={username} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
           </div>
         )}
       </div>

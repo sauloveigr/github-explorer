@@ -41,8 +41,8 @@ export default function RepoDetailPage() {
         {error && <ErrorMessage message={error} />}
         {loading && <RepoDetailSkeleton />}
         {repo && (
-          <div className="card shadow-sm overflow-hidden">
-            <div className={styles.repoDetailHeader}>
+          <article className="card shadow-sm overflow-hidden">
+            <header className={styles.repoDetailHeader}>
               <div className="d-flex justify-content-between align-items-start flex-wrap gap-3">
                 <h1 className="h3 mb-0 text-white">{repo.name}</h1>
                 <a
@@ -57,24 +57,26 @@ export default function RepoDetailPage() {
               {repo.description && (
                 <p className={clsx('mt-2 mb-0', styles.repoDetailDesc)}>{repo.description}</p>
               )}
-            </div>
+            </header>
             <div className="card-body">
-              <div className="row row-cols-2 row-cols-md-3 g-3">
+              <section aria-label="Estatísticas" className="row row-cols-2 row-cols-md-3 g-3">
                 <StatCard label="Estrelas" value={`⭐ ${repo.stargazers_count.toLocaleString()}`} />
                 <StatCard label="Forks" value={`🔀 ${repo.forks_count.toLocaleString()}`} />
                 {repo.language && <StatCard label="Linguagem" value={repo.language} />}
-              </div>
+              </section>
               {repo.topics && repo.topics.length > 0 && (
-                <div className="mt-3 d-flex flex-wrap gap-2">
+                <ul className="list-unstyled mt-3 d-flex flex-wrap gap-2 mb-0" aria-label="Tópicos">
                   {repo.topics.map((topic) => (
-                    <span key={topic} className={clsx('rounded-pill small px-2 py-1', styles.topicBadge)}>
-                      {topic}
-                    </span>
+                    <li key={topic}>
+                      <span className={clsx('rounded-pill small px-2 py-1', styles.topicBadge)}>
+                        {topic}
+                      </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               )}
             </div>
-          </div>
+          </article>
         )}
       </div>
     </Layout>

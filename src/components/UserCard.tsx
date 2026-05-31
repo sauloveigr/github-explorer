@@ -29,16 +29,20 @@ export default function UserCard({ user }: { user: GitHubUser }) {
         </div>
         {user.bio && <p className="text-muted small mt-3 mb-0">{user.bio}</p>}
         <hr className="my-3" />
-        <div className="d-flex justify-content-around text-center">
+        <section className="d-flex justify-content-around text-center" aria-label="Estatísticas">
           <Stat label="Seguidores" value={user.followers} />
           <Stat label="Seguindo" value={user.following} />
           <Stat label="Repos" value={user.public_repos} />
-        </div>
+        </section>
         {(user.location || user.email) && (
-          <div className="mt-3 d-flex flex-column gap-1">
+          <address className="mt-3 d-flex flex-column gap-1 mb-0">
             {user.location && <span className="text-muted small">📍 {user.location}</span>}
-            {user.email && <span className="text-muted small">✉️ {user.email}</span>}
-          </div>
+            {user.email && (
+              <a href={`mailto:${user.email}`} className="text-muted small">
+                ✉️ {user.email}
+              </a>
+            )}
+          </address>
         )}
       </div>
     </div>

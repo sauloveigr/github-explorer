@@ -15,7 +15,7 @@ export default function RepoCard({ repo, username }: Props) {
 
   return (
     <Link to={`/user/${username}/repo/${repo.name}`} className="text-decoration-none">
-      <div className={clsx('card mb-2 shadow-sm', styles.repoCard)}>
+      <article className={clsx('card mb-2 shadow-sm', styles.repoCard)}>
         <div className="card-body">
           <h3 className={clsx('h6 mb-1', styles.repoCardName)}>{repo.name}</h3>
           {repo.description && (
@@ -40,7 +40,7 @@ export default function RepoCard({ repo, username }: Props) {
             </span>
           </div>
         </div>
-      </div>
+      </article>
     </Link>
   );
 }

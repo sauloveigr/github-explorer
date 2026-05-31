@@ -32,20 +32,21 @@ export default function SearchPage() {
               <div className="card-body p-4">
                 <SearchBar onSearch={handleSearch} />
                 {history.length > 0 && (
-                  <div className="mt-4">
+                  <section aria-label="Buscas recentes" className="mt-4">
                     <p className="text-muted small mb-2">Buscas recentes:</p>
-                    <div className="d-flex flex-wrap gap-2">
+                    <ul className="list-unstyled d-flex flex-wrap gap-2 mb-0">
                       {history.map((username) => (
-                        <button
-                          key={username}
-                          className="btn btn-sm btn-outline-secondary"
-                          onClick={() => handleSearch(username)}
-                        >
-                          @{username}
-                        </button>
+                        <li key={username}>
+                          <button
+                            className="btn btn-sm btn-outline-secondary"
+                            onClick={() => handleSearch(username)}
+                          >
+                            @{username}
+                          </button>
+                        </li>
                       ))}
-                    </div>
-                  </div>
+                    </ul>
+                  </section>
                 )}
               </div>
             </div>

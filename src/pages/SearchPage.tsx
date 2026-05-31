@@ -2,23 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import SearchBar from '../components/SearchBar';
-
-const HISTORY_KEY = 'gh_search_history';
-const MAX_HISTORY = 5;
-
-function getHistory(): string[] {
-  try {
-    return JSON.parse(localStorage.getItem(HISTORY_KEY) ?? '[]') as string[];
-  } catch {
-    return [];
-  }
-}
-
-function saveHistory(username: string): string[] {
-  const updated = [username, ...getHistory().filter((u) => u !== username)].slice(0, MAX_HISTORY);
-  localStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
-  return updated;
-}
+import GitHubIcon from '../components/GitHubIcon';
+import { getHistory, saveHistory } from '../utils/history';
 
 export default function SearchPage() {
   const navigate = useNavigate();
@@ -35,6 +20,7 @@ export default function SearchPage() {
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-8">
             <div className="text-center mb-5">
+              <GitHubIcon className="mb-3" />
               <h1 className="display-6 fw-bold mb-2">GitHub Explorer</h1>
               <p className="text-muted">Explore repositórios de qualquer usuário do GitHub</p>
             </div>
@@ -43,13 +29,13 @@ export default function SearchPage() {
               <div className="mt-4">
                 <p className="text-muted small mb-2">Buscas recentes:</p>
                 <div className="d-flex flex-wrap gap-2">
-                  {history.map((u) => (
+                  {history.map((username) => (
                     <button
-                      key={u}
+                      key={username}
                       className="btn btn-sm btn-outline-secondary"
-                      onClick={() => handleSearch(u)}
+                      onClick={() => handleSearch(username)}
                     >
-                      @{u}
+                      @{username}
                     </button>
                   ))}
                 </div>

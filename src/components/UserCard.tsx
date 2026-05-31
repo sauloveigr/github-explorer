@@ -4,7 +4,7 @@ export default function UserCard({ user }: { user: GitHubUser }) {
   return (
     <div className="card shadow-sm">
       <div className="card-body">
-        <div className="d-flex flex-column flex-md-row align-items-center gap-3">
+        <div className="d-flex flex-row align-items-center gap-3">
           <img
             src={user.avatar_url}
             alt={`Avatar de ${user.login}`}
@@ -26,10 +26,10 @@ export default function UserCard({ user }: { user: GitHubUser }) {
           </div>
         </div>
         <hr />
-        <div className="row row-cols-3 g-2 text-center">
+        <div className="d-flex justify-content-around text-center">
           <Stat label="Seguidores" value={user.followers} />
           <Stat label="Seguindo" value={user.following} />
-          <Stat label="Repositórios" value={user.public_repos} />
+          <Stat label="Repos" value={user.public_repos} />
         </div>
         {user.location && (
           <p className="text-muted small mt-2 mb-0">📍 {user.location}</p>
@@ -46,7 +46,7 @@ function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div className="col">
       <div className="fw-bold fs-5">{value.toLocaleString()}</div>
-      <div className="text-muted" style={{ fontSize: '0.75rem' }}>{label}</div>
+      <div className="text-muted stat-label">{label}</div>
     </div>
   );
 }

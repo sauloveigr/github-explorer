@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState } from 'react';
 
 interface Props {
   initialValue?: string;
@@ -8,8 +8,8 @@ interface Props {
 export default function SearchBar({ initialValue = '', onSearch }: Props) {
   const [value, setValue] = useState(initialValue);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: { preventDefault(): void }) => {
+    event.preventDefault();
     const trimmed = value.trim();
     if (trimmed) onSearch(trimmed);
   };
@@ -22,8 +22,9 @@ export default function SearchBar({ initialValue = '', onSearch }: Props) {
           className="form-control"
           placeholder="Buscar usuário no GitHub..."
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(event) => setValue(event.target.value)}
           aria-label="Nome do usuário"
+          autoFocus={!initialValue}
         />
         <button type="submit" className="btn btn-dark" disabled={!value.trim()}>
           Buscar

@@ -65,7 +65,7 @@ export default function RepoDetailPage() {
               {repo.topics && repo.topics.length > 0 && (
                 <div className="mt-3 d-flex flex-wrap gap-2">
                   {repo.topics.map((topic) => (
-                    <span key={topic} className="badge rounded-pill bg-info text-dark">
+                    <span key={topic} className="rounded-pill small px-2 py-1 topic-badge">
                       {topic}
                     </span>
                   ))}

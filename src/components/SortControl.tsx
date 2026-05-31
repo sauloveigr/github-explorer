@@ -5,8 +5,8 @@ type SortDir = 'asc' | 'desc';
 interface Props {
   sortBy: SortBy;
   sortDir: SortDir;
-  onSortBy: (val: SortBy) => void;
-  onSortDir: (val: SortDir) => void;
+  onSortBy: (sortField: SortBy) => void;
+  onSortDir: (direction: SortDir) => void;
 }
 
 const OPTIONS: { value: SortBy; label: string }[] = [
@@ -19,15 +19,14 @@ export default function SortControl({ sortBy, sortDir, onSortBy, onSortDir }: Pr
   return (
     <div className="d-flex gap-2 align-items-center">
       <select
-        className="form-select form-select-sm"
-        style={{ width: 'auto' }}
+        className="form-select form-select-sm sort-select"
         value={sortBy}
-        onChange={(e) => onSortBy(e.target.value as SortBy)}
+        onChange={(event) => onSortBy(event.target.value as SortBy)}
         aria-label="Ordenar por"
       >
-        {OPTIONS.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
+        {OPTIONS.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>

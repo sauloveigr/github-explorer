@@ -8,7 +8,7 @@ interface State {
   error: string | null;
 }
 
-export const useRepositories = (username: string): State => {
+export function useRepositories(username: string): State {
   const [state, setState] = useState<State>({
     repos: [],
     loading: true,
@@ -32,4 +32,4 @@ export const useRepositories = (username: string): State => {
   }, [username]);
 
   return state;
-};
+}

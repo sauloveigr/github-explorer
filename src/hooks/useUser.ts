@@ -8,7 +8,7 @@ interface State {
   error: string | null;
 }
 
-export const useUser = (username: string): State => {
+export function useUser(username: string): State {
   const [state, setState] = useState<State>({
     user: null,
     loading: true,
@@ -32,4 +32,4 @@ export const useUser = (username: string): State => {
   }, [username]);
 
   return state;
-};
+}

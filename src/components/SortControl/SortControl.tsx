@@ -1,4 +1,4 @@
-import type { SortBy } from '../types';
+import type { SortBy } from '../../types';
 import styles from './SortControl.module.css';
 
 type SortDir = 'asc' | 'desc';

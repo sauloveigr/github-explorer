@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import type { GitHubRepository } from '../types';
-import LANG_COLORS from '../utils/langColors';
-import { formatRelativeDate } from '../utils/date';
+import type { GitHubRepository } from '../../types';
+import LANG_COLORS from '../../utils/langColors';
+import { formatRelativeDate } from '../../utils/date';
 import styles from './RepoCard.module.css';
 
 interface Props {

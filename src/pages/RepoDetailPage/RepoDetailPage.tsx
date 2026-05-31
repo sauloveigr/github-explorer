@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Layout from '../components/Layout';
-import ErrorMessage from '../components/ErrorMessage';
-import { getRepo } from '../services/github';
-import type { GitHubRepository } from '../types';
+import Layout from '../../components/Layout/Layout';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import { getRepo } from '../../services/github';
+import type { GitHubRepository } from '../../types';
 import styles from './RepoDetailPage.module.css';
 
 export default function RepoDetailPage() {

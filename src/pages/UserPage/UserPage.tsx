@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Layout from '../components/Layout';
-import SearchBar from '../components/SearchBar';
-import UserCard from '../components/UserCard';
-import RepoCard from '../components/RepoCard';
-import SortControl from '../components/SortControl';
-import LoadingSpinner from '../components/LoadingSpinner';
-import RepoSkeleton from '../components/RepoSkeleton';
-import ErrorMessage from '../components/ErrorMessage';
-import { useUser } from '../hooks/useUser';
-import { useRepositories } from '../hooks/useRepositories';
-import type { SortBy } from '../types';
-import { comparators } from '../utils/sort';
+import Layout from '../../components/Layout/Layout';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import UserCard from '../../components/UserCard/UserCard';
+import RepoCard from '../../components/RepoCard/RepoCard';
+import SortControl from '../../components/SortControl/SortControl';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import RepoSkeleton from '../../components/RepoSkeleton/RepoSkeleton';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import { useUser } from '../../hooks/useUser';
+import { useRepositories } from '../../hooks/useRepositories';
+import type { SortBy } from '../../types';
+import { comparators } from '../../utils/sort';
 
 type SortDir = 'asc' | 'desc';
 

@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Layout from '../components/Layout';
-import SearchBar from '../components/SearchBar';
-import GitHubIcon from '../components/GitHubIcon';
-import { getHistory, saveHistory } from '../utils/history';
+import Layout from '../../components/Layout/Layout';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import GitHubIcon from '../../components/GitHubIcon/GitHubIcon';
+import { getHistory, saveHistory } from '../../utils/history';
 import styles from './SearchPage.module.css';
 
 export default function SearchPage() {

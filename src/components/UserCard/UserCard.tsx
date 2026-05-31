@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { GitHubUser } from '../types';
+import type { GitHubUser } from '../../types';
 import styles from './UserCard.module.css';
 
 export default function UserCard({ user }: { user: GitHubUser }) {

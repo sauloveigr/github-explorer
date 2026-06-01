@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './SearchBar.module.css';
 
 interface Props {
   initialValue?: string;
@@ -16,7 +17,7 @@ export default function SearchBar({ initialValue = '', onSearch }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="input-group input-group-lg shadow-sm">
+      <div className={`input-group shadow-sm ${styles.inputGroup}`}>
         <input
           type="text"
           className="form-control"

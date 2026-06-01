@@ -1,0 +1,11 @@
+.inputGroup :global(.form-control),
+.inputGroup :global(.btn) {
+  font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .inputGroup :global(.form-control),
+  .inputGroup :global(.btn) {
+    font-size: 1rem;
+  }
+}

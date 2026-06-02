@@ -14,9 +14,10 @@ Aplicação client-side que consome a API do GitHub e exibe os repositórios mai
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/)
 - [React Router v7](https://reactrouter.com/)
-- [Axios](https://axios-http.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/) — RTK Query para data fetching + slice para estado global
+- [Axios](https://axios-http.com/) — cliente HTTP com interceptors para tratamento de erros
 - [Bootstrap 5](https://getbootstrap.com/)
-- [clsx](https://github.com/lukeed/clsx)
+- [Jest](https://jestjs.io/) + [Testing Library](https://testing-library.com/)
 
 ## Funcionalidades
 
@@ -25,9 +26,11 @@ Aplicação client-side que consome a API do GitHub e exibe os repositórios mai
 - Listagem de repositórios ordenados por estrelas (decrescente)
 - Ordenação por estrelas, nome ou data de atualização — crescente ou decrescente
 - Página de detalhes do repositório com link externo para o GitHub
-- Histórico de buscas recentes
+- Histórico de buscas recentes (persistido no localStorage via Redux)
 - Skeleton loading durante o carregamento
+- Cache automático de requisições via RTK Query
 - Layout responsivo para mobile e desktop
+- Error Boundary global para erros de renderização inesperados
 
 ## Instalação
 
@@ -61,34 +64,78 @@ yarn build
 yarn preview
 ```
 
+## Testes
+
+```bash
+# Executa todos os testes
+yarn test
+
+# Modo watch (re-executa ao salvar)
+yarn test:watch
+```
+
+44 testes cobrindo utilitários, componentes, store Redux e slice de histórico.
+
 ## Estrutura do projeto
 
 ```
 src/
-├── components/          # Componentes reutilizáveis
-│   ├── Component.tsx
-│   └── Component.module.css
-├── hooks/               # Custom hooks (useUser, useRepositories)
-├── pages/               # Páginas da aplicação
-│   ├── Page.tsx
-│   └── Page.module.css
+├── components/
+│   ├── ErrorBoundary/   # Captura erros de renderização globais
+│   ├── ErrorMessage/    # Mensagem de erro acessível
+│   ├── Layout/          # Navbar + main wrapper
+│   ├── RecentSearches/  # Lista de buscas recentes
+│   ├── RepoCard/        # Card de repositório com link para detalhes
+│   ├── RepoList/        # Lista de repos com sort, loading e estado vazio
+│   ├── RepoSkeleton/    # Skeleton de carregamento do RepoCard
+│   ├── SearchBar/       # Input de busca com submit
+│   ├── SearchCard/      # Card visual da página de busca
+│   ├── SortControl/     # Controle de ordenação (campo + direção)
+│   └── UserCard/        # Perfil do usuário + UserCardSkeleton
+├── pages/
+│   ├── SearchPage/      # Busca inicial + histórico recente
+│   ├── UserPage/        # Perfil do usuário + lista de repositórios
+│   ├── RepoDetailPage/  # Detalhes de um repositório
+│   └── NotFoundPage/
 ├── router/              # Configuração de rotas
-├── services/            # Integração com a API do GitHub
-├── types/               # Tipagens TypeScript
-└── utils/               # Funções utilitárias
-    ├── date.ts          # Formatação de datas
-    ├── history.ts       # Histórico de buscas (localStorage)
-    ├── langColors.ts    # Cores por linguagem de programação
-    └── sort.ts          # Comparadores de ordenação
+├── services/
+│   └── api.ts           # Instância Axios com interceptors (403/404)
+├── store/
+│   ├── githubApi.ts     # RTK Query — endpoints getUser, getUserRepos, getRepo
+│   ├── historySlice.ts  # Slice Redux — histórico de buscas + localStorage
+│   ├── hooks.ts         # useAppSelector / useAppDispatch tipados
+│   └── index.ts         # configureStore
+├── types/               # Interfaces TypeScript (GitHubUser, GitHubRepository)
+└── utils/
+    ├── date.ts          # Formatação de datas relativas (Intl.RelativeTimeFormat)
+    ├── langColors.ts    # Mapa de cores por linguagem de programação
+    └── sort.ts          # Comparadores de ordenação de repositórios
 ```
+
+## Arquitetura
+
+As páginas consomem dados exclusivamente via **RTK Query** (`useGetUserQuery`, `useGetUserReposQuery`, `useGetRepoQuery`). O RTK Query usa uma `axiosBaseQuery` customizada que delega os requests para a instância Axios em `services/api.ts`, onde os interceptors transformam erros 403 e 404 em mensagens legíveis antes de chegarem aos componentes.
+
+O estado global de histórico de buscas vive no Redux (`historySlice`) e é sincronizado com `localStorage` a cada `addToHistory`.
+
+## Segurança
+
+O `index.html` inclui uma `Content-Security-Policy` que restringe conexões à própria origem e à API do GitHub, e imagens ao domínio `githubusercontent.com`.
+
+## CI/CD
+
+GitHub Actions executa lint, testes e build a cada push ou pull request para a branch `main`.
 
 ## Requisitos atendidos
 
 ### Técnicos
-- ✅ React 19 (sem Vue ou Angular)
-- ✅ Rotas com React Router v7
+- ✅ React 19 com TypeScript
+- ✅ Redux Toolkit (RTK Query + historySlice)
 - ✅ Axios para consumo da API
+- ✅ Rotas com React Router v7
+- ✅ Testes com Jest e Testing Library (TDD)
 - ✅ Layout responsivo com Bootstrap 5
+- ✅ CI/CD com GitHub Actions
 
 ### Negócio
 - ✅ Busca de usuário do GitHub
@@ -99,6 +146,8 @@ src/
 
 ### Bônus
 - ✅ Aplicação hospedada no Vercel
+- ✅ Content Security Policy (CSP)
+- ✅ Cache de requisições via RTK Query
 
 ## APIs utilizadas
 

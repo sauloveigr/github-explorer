@@ -1,4 +1,4 @@
-import type { GitHubRepository, SortBy } from '../types';
+import type { GitHubRepository, SortBy } from '../types/github';
 
 type Repo = GitHubRepository;
 

@@ -1,7 +1,5 @@
-import type { SortBy } from '../../types';
+import type { SortBy, SortDir } from '../../types/github';
 import styles from './SortControl.module.css';
-
-type SortDir = 'asc' | 'desc';
 
 interface Props {
   sortBy: SortBy;

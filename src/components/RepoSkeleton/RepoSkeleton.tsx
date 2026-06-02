@@ -3,7 +3,7 @@ import styles from './RepoSkeleton.module.css';
 
 export default function RepoSkeleton() {
   return (
-    <div className="card mb-2 shadow-sm">
+    <div className="card mb-2 shadow-sm" aria-hidden="true">
       <div className="card-body py-3">
         <div className="d-flex justify-content-between align-items-start">
           <div className={clsx(styles.skeleton, styles.skeletonTitle)} />

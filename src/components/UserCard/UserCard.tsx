@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import type { GitHubUser } from '../../types';
+import type { GitHubUser } from '../../types/github';
 import styles from './UserCard.module.css';
 
 export default function UserCard({ user }: { user: GitHubUser }) {
   return (
-    <div className="card shadow-sm overflow-hidden">
+    <article className="card shadow-sm overflow-hidden">
       <div className={styles.userCardHeader} />
       <div className="card-body">
         <div className={clsx('d-flex align-items-end gap-3', styles.userCardTop)}>
@@ -45,15 +45,17 @@ export default function UserCard({ user }: { user: GitHubUser }) {
           </address>
         )}
       </div>
-    </div>
+    </article>
   );
 }
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div className="col">
-      <div className="fw-bold fs-5">{value.toLocaleString()}</div>
-      <div className={clsx('text-muted', styles.statLabel)}>{label}</div>
+      <dl className="mb-0">
+        <dd className="fw-bold fs-5 mb-0">{value.toLocaleString()}</dd>
+        <dt className={clsx('fw-normal text-muted', styles.statLabel)}>{label}</dt>
+      </dl>
     </div>
   );
 }

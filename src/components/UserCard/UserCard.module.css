@@ -1,3 +1,51 @@
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e9ecef 25%, #f0f0f0 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 0.25rem;
+}
+
+.skeletonAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeletonName {
+  height: 1.1rem;
+  width: 60%;
+}
+
+.skeletonLogin {
+  height: 0.8rem;
+  width: 40%;
+}
+
+.skeletonBio {
+  height: 0.8rem;
+  width: 85%;
+}
+
+.skeletonStatValue {
+  height: 1.4rem;
+  width: 2.5rem;
+}
+
+.skeletonStatLabel {
+  height: 0.75rem;
+  width: 3.5rem;
+}
+
 .userCardHeader {
   height: 4.5rem;
   background: linear-gradient(135deg, #1a1a2e, #0f3460);

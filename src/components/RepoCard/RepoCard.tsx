@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import type { GitHubRepository } from '../../types';
+import type { GitHubRepository } from '../../types/github';
 import LANG_COLORS from '../../utils/langColors';
 import { formatRelativeDate } from '../../utils/date';
 import styles from './RepoCard.module.css';
@@ -19,14 +19,14 @@ export default function RepoCard({ repo, username }: Props) {
         <div className="card-body">
           <h3 className={clsx('h6 mb-1', styles.repoCardName)}>{repo.name}</h3>
           {repo.description && (
-            <p className={clsx('text-muted small mb-0', styles.repoCardDesc)}>
-              {repo.description}
-            </p>
+            <p className={clsx('text-muted small mb-0', styles.repoCardDesc)}>{repo.description}</p>
           )}
           <div className="d-flex align-items-center justify-content-between mt-2">
             <div className="d-flex align-items-center gap-3">
               {repo.language && (
-                <span className={clsx('d-flex align-items-center gap-1 small', styles.repoLanguage)}>
+                <span
+                  className={clsx('d-flex align-items-center gap-1 small', styles.repoLanguage)}
+                >
                   <span className={styles.langDot} style={{ backgroundColor: langColor }} />
                   {repo.language}
                 </span>

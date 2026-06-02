@@ -11,9 +11,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 403) {
-      return Promise.reject(
-        new Error('Rate limit excedido. Tente novamente em alguns minutos.'),
-      );
+      return Promise.reject(new Error('Rate limit excedido. Tente novamente em alguns minutos.'));
     }
     if (error.response?.status === 404) {
       return Promise.reject(new Error('Usuário não encontrado.'));

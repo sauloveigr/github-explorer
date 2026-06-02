@@ -26,3 +26,4 @@ export interface GitHubRepository {
 }
 
 export type SortBy = 'stars' | 'name' | 'updated';
+export type SortDir = 'asc' | 'desc';

@@ -1,88 +1,42 @@
-import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from '../../components/Layout/Layout';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import UserCard from '../../components/UserCard/UserCard';
-import RepoCard from '../../components/RepoCard/RepoCard';
-import SortControl from '../../components/SortControl/SortControl';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import RepoSkeleton from '../../components/RepoSkeleton/RepoSkeleton';
+import UserCardSkeleton from '../../components/UserCard/UserCardSkeleton';
+import RepoList from '../../components/RepoList/RepoList';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import { useUser } from '../../hooks/useUser';
-import { useRepositories } from '../../hooks/useRepositories';
-import type { SortBy } from '../../types';
-import { comparators } from '../../utils/sort';
-
-type SortDir = 'asc' | 'desc';
+import { useGetUserQuery, getApiErrorMessage } from '../../store/githubApi';
+import { addToHistory } from '../../store/historySlice';
+import { useAppDispatch } from '../../store/hooks';
 
 export default function UserPage() {
   const { username = '' } = useParams<{ username: string }>();
   const navigate = useNavigate();
-  const [sortBy, setSortBy] = useState<SortBy>('stars');
-  const [sortDir, setSortDir] = useState<SortDir>('desc');
+  const dispatch = useAppDispatch();
 
-  const { user, loading: userLoading, error: userError } = useUser(username);
-  const { repos, loading: reposLoading, error: reposError } = useRepositories(username);
+  const { data: user, isLoading: userLoading, error: userError } = useGetUserQuery(username);
 
-  const sortedRepos = [...repos].sort((a, b) =>
-    (sortDir === 'asc' ? 1 : -1) * comparators[sortBy](a, b)
-  );
+  const handleSearch = (newUsername: string) => {
+    dispatch(addToHistory(newUsername));
+    navigate(`/user/${newUsername}`);
+  };
 
   return (
     <Layout>
       <div className="container">
         <div className="mb-4">
-          <SearchBar initialValue={username} onSearch={(newUsername) => navigate(`/user/${newUsername}`)} />
+          <SearchBar initialValue={username} onSearch={handleSearch} />
         </div>
 
-        {userError && <ErrorMessage message={userError} />}
+        {userError && <ErrorMessage message={getApiErrorMessage(userError)} />}
 
         {!userError && (
           <div className="row g-4">
             <div className="col-lg-4">
-              {userLoading && <LoadingSpinner />}
+              {userLoading && <UserCardSkeleton />}
               {user && <UserCard user={user} />}
             </div>
-
-            <section className="col-lg-8" aria-label="Repositórios">
-              <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                <h2 className="h5 mb-0">
-                  Repositórios
-                  {!reposLoading && (
-                    <span className="text-muted fw-normal ms-2 small">({repos.length})</span>
-                  )}
-                </h2>
-                {!reposLoading && (
-                  <SortControl
-                    sortBy={sortBy}
-                    sortDir={sortDir}
-                    onSortBy={setSortBy}
-                    onSortDir={setSortDir}
-                  />
-                )}
-              </div>
-
-              {reposLoading && (
-                <ul className="list-unstyled mb-0">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <li key={index}><RepoSkeleton /></li>
-                  ))}
-                </ul>
-              )}
-              {reposError && <ErrorMessage message={reposError} />}
-              {!reposLoading && !reposError && sortedRepos.length === 0 && (
-                <p className="text-muted">Nenhum repositório público encontrado.</p>
-              )}
-              {!reposLoading && (
-                <ul className="list-unstyled mb-0">
-                  {sortedRepos.map((repo) => (
-                    <li key={repo.id}>
-                      <RepoCard repo={repo} username={username} />
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </section>
+            <RepoList username={username} />
           </div>
         )}
       </div>

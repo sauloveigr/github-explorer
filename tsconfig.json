@@ -20,6 +20,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "types": ["jest", "@testing-library/jest-dom"],
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
